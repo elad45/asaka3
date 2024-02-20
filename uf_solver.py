@@ -67,5 +67,6 @@ def main():
     print("-----")
     print("\n".join([str(x) for x in core]))
 
+
 if __name__ == "__main__":
     main()
