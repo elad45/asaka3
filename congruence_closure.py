@@ -32,6 +32,10 @@ class congruenceClosure:
             print(f"after top level groups are: {self.groups}")
             congruence_changed = self.congruence()
             print(f"after congruence groups are: {self.groups}")
+
+
+    
+
     def get_groups(self):
         return self.groups
 
@@ -111,11 +115,16 @@ class congruenceClosure:
                             intersection_set = dict_elements[arg1].intersection(dict_elements[arg2])
                             if intersection_set:
                                 isCommon = True
+                                break
                             else:
                                 isCommon = False
                     if isCommon:
-                        self.groups[i].extend(element for element in self.groups[j] if element not in self.groups[i])
-                        self.groups.pop(j)
+                        set1list = list(set1)
+                        set1inx = set1list[0]
+                        set2list = list(set2)
+                        set2inx = set2list[0]
+                        self.groups[set1inx].extend(element for element in self.groups[set2inx] if element not in self.groups[set1inx])
+                        self.groups.pop(set2inx)
                         return True
         return False
     # if len(list_of_applications) >= 2:
