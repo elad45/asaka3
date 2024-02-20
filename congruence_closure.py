@@ -95,6 +95,9 @@ class congruenceClosure:
             args1 = [arg for arg in list_applications[i].args()]
             set1 = dict_applications[list_applications[i]]
             for j in range(i + 1, len(list_applications)):
+                #TODO check if  i,j apply the same function
+                if list_applications[i]._content.payload != list_applications[j]._content.payload:
+                    continue
                 # check if they have a groups to union:
                 set2 = dict_applications[list_applications[j]]
                 if set1.symmetric_difference(set2):
