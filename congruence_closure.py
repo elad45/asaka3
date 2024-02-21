@@ -25,6 +25,7 @@ class congruenceClosure:
                     if (var1 in group1 and var2 in group2) or (var1 in group2 and var2 in group1):
                         self.groups[i].extend(var for var in group2 if var not in group1)
                         self.groups.pop(j)
+
                         return True
         return False
 
@@ -105,6 +106,8 @@ class congruenceClosure:
                     if var1 in group and var2 in group:
                         if lit not in self.core_lit:
                             self.core_lit.append(lit)
+                        if lit not in self.core_ans:
+                            self.core_ans.append(lit)
                         return True  # unsat
         return False  # sat
 
@@ -113,7 +116,7 @@ class congruenceClosure:
         if literal.is_equals():
             var1, var2 = literal.args()
             self.core_var.append([var1, var2])
-
+            self.core_ans.append(literal)
     def solve(self):
         for i in range(len(self.cube)):
             self.add_literal(self.cube[i])
@@ -128,8 +131,8 @@ class congruenceClosure:
                 #TODO it has to be inside the while block
                 is_unsat = self.fail()
                 if is_unsat:
-                    return False, self.core_lit
+                    return False, self.core_ans
         is_unsat = self.fail()
         if is_unsat:
-            return False, self.core_lit
+            return False, self.core_ans
         return True, None
