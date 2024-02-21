@@ -27,11 +27,11 @@ from pysmt.shortcuts import Not, Equals, Function
 # part of `c`.
 def uf_solver(cube):
     cc = congruenceClosure(cube)
-    bool = cc.solve()
-    if bool:
-        return True, None
+    sat,core = cc.solve()
+    if sat:
+        return True,None
     else:
-        return False, None
+        return False, core
 
 
 # main function
@@ -57,7 +57,7 @@ def main():
     else:
         print("unsat")
         print("-----")
-        #print("\n".join([str(x) for x in core]))
+        print("\n".join([str(x) for x in core]))
 
 
 if __name__ == "__main__":
