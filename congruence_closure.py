@@ -23,18 +23,27 @@ class congruenceClosure:
                 raise ValueError("invalid literal")
         print(f"groups are:{self.groups}")
 
+    def fail(self):
+        for lit in self.cube:
+            if lit.is_not():
+                lit = lit.args()[0]
+                var1, var2 = lit.args()
+                for group in self.groups:
+                    if var1 in group and var2 in group:
+                        return False
+        return True
     def solve(self):
         self.parse_cube()
         top_level_changed = True
         congruence_changed = True
         while top_level_changed or congruence_changed:
             top_level_changed = self.top_level()
-            print(f"after top level groups are: {self.groups}")
+            print(f"after top level groups are:  {self.groups}")
             congruence_changed = self.congruence()
             print(f"after congruence groups are: {self.groups}")
+        return self.fail()
 
 
-    
 
     def get_groups(self):
         return self.groups
