@@ -49,7 +49,7 @@ def main():
     # we are assuming `formula` is a flat cube.
     # `cube` represents `formula` as a list of literals
     cube = formula.args()
-    print(cube)
+    #print(cube)
     # check if sat or unsat and print result
     sat, core = uf_solver(cube)
     if sat:
